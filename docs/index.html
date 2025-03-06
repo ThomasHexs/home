@@ -1,160 +1,940 @@
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://127.0.0.1:8000/ -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Required meta tags -->
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>
-        iBooker - 
-    可能是东半球最大的 AI 社区 | 欢迎大家贡献项目 -- ApacheCN 提供支持
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科技服务门户 - 首页</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-deep-blue: #0A192F;
+            --primary-neon-blue: #6366F1;
+            --primary-neon-purple: #8B5CF6;
+            --secondary-space-gray: #1E293B;
+            --secondary-data-green: #10B981;
+            --text-light: #F8FAFC;
+            --text-dim: #94A3B8;
+            --gradient-blue-purple: linear-gradient(90deg, var(--primary-neon-blue) 0%, var(--primary-neon-purple) 100%);
+            --shadow-standard: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition-standard: all 0.3s ease-in-out;
+        }
 
-    </title>
-    <meta name="description" content="iBooker 布客 - 可能是东半球最大的 AI 社区 | 欢迎大家贡献项目">
-    <meta name="keywords" content="数据科学,数据分析,机器学习,人工智能,深度学习,推荐系统,NLP,CV,回归,分类,聚类,降维,朴素贝叶斯,决策树,SVM,KMeans,PCA,SVD,Logistic,DNN,CNN,LSTM,RNN,GAN,自编码器,sklearn,scikit-learn,TensorFlow,PyTorch,Python,NumPy,Matplotlib,Pandas">
-    <meta name="author" content="ApacheCN">
-    <!-- 
-<style type="text/css">
-    p{
-        font-size: 40px;
-        font-weight: lighter;
-        margin-bottom: 90px;
-    }
-</style>
- -->
-    <style type="text/css">
-        #content {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--primary-deep-blue);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 全局流光边框效果 */
+        .glow-border {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: var(--transition-standard);
+        }
+
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: var(--gradient-blue-purple);
+            border-radius: inherit;
+            animation: flow-light 3s linear infinite;
+        }
+
+        .glow-border::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            right: 1px;
+            bottom: 1px;
+            z-index: -1;
+            background: var(--primary-deep-blue);
+            border-radius: inherit;
+        }
+
+        /* 顶部导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: rgba(10, 25, 47, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .logo-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .brand-name {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: var(--gradient-blue-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .menu-container {
+            margin-left: 2rem;
+        }
+
+        .menu-button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition-standard);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .menu-button:hover {
+            color: var(--primary-neon-blue);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--secondary-space-gray);
+            border-radius: 8px;
+            min-width: 200px;
+            box-shadow: var(--shadow-standard);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition-standard);
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+        }
+
+        .menu-container:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            display: block;
+            text-decoration: none;
+            color: var(--text-light);
+            transition: var(--transition-standard);
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--primary-neon-blue);
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .auth-button {
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-standard);
+        }
+
+        .login-button {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--primary-neon-blue);
+        }
+
+        .login-button:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+
+        .register-button {
+            position: relative;
+            background-color: var(--primary-neon-blue);
+            color: var(--text-light);
+            border: none;
+            overflow: hidden;
+        }
+
+        .register-button:hover {
+            background-color: var(--primary-neon-purple);
+        }
+
+        /* Banner区域 */
+        .banner {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 5%;
+            overflow: hidden;
+        }
+
+        .banner-canvas {
+            position: absolute;
+            top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            position:fixed;
-            /* background: url("/static/img/bg2.png"); */
-            background: url("http://data.apachecn.org/img/HomePage/bg2.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center center;
+            z-index: -1;
         }
-        .p1 {
-            font-size: 80px;
-            font-weight: lighter;
-            text-align:center;
-        }
-        .p2 {
-            font-size: 20px;
-            font-weight: lighter;
-            text-align:center;
-        }
-        #footer {
-            position:fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            z-index: 9999;
-        }
-        #qr {
+
+        .banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
+            z-index: 2;
         }
-        #qr img {
-            max-width: 150px;
-            opacity: 0.7;
+
+        .banner-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .banner-subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: var(--text-dim);
+        }
+
+        .cta-button {
+            position: relative;
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            background: var(--gradient-blue-purple);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: var(--transition-standard);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: flow-light 3s infinite;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        @keyframes flow-light {
+            0% {
+                left: -100%;
+            }
+            50% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* 核心服务展示区 */
+        .services {
+            padding: 5rem 5%;
+            background-color: var(--secondary-space-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background-color: var(--primary-deep-blue);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--transition-standard);
+            box-shadow: var(--shadow-standard);
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+            transform: skewX(-15deg);
+            transition: var(--transition-standard);
+            opacity: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-card:hover::before {
+            animation: card-scan 1.5s forwards;
+            opacity: 1;
+        }
+
+        @keyframes card-scan {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            transition: var(--transition-standard);
+            transform-style: preserve-3d;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotateY(180deg);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            color: var(--primary-neon-blue);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-standard);
+        }
+
+        .service-link:hover {
+            color: var(--primary-neon-purple);
+        }
+
+        /* 实时功能入口 */
+        .feature-entry {
+            padding: 5rem 5%;
+            background-color: var(--primary-deep-blue);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.1rem;
+            background-color: var(--secondary-space-gray);
+            color: var(--text-light);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            transition: var(--transition-standard);
+            box-shadow: var(--shadow-standard);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-neon-blue);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gradient-blue-purple);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition-standard);
+        }
+
+        .search-button:hover {
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .result-preview {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            width: 100%;
+            background-color: var(--secondary-space-gray);
+            border-radius: 8px;
+            box-shadow: var(--shadow-standard);
+            padding: 1rem;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition-standard);
+        }
+
+        .search-container:focus-within .result-preview {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .preview-item {
+            padding: 0.8rem;
+            border-radius: 4px;
+            transition: var(--transition-standard);
+        }
+
+        .preview-item:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+
+        .preview-title {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .preview-description {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .navbar-left {
+                flex-grow: 1;
+            }
+
+            .menu-container {
+                margin-left: 1rem;
+            }
+
+            .banner-title {
+                font-size: 2.5rem;
+            }
+
+            .banner-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .brand-name {
+                font-size: 1.2rem;
+            }
+
+            .navbar-right {
+                gap: 0.5rem;
+            }
+
+            .auth-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .banner-title {
+                font-size: 2rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
         }
     </style>
-    <!-- Bootstrap CSS / Color Scheme -->
-    <link rel="stylesheet" href="./index_files/default.css" id="theme-color">
-    <link rel="stylesheet" href="./index_files/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-fixed-top">
-        <a class="navbar-brand mb-0 h1" href="http://www.ibooker.org.cn/">iBooker 首页</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><a class="nav-link" href="https://docs.apachecn.org/">中文文档<span class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="https://github.com/apachecn/ai-roadmap">学习路线</a></li>
-                <!-- <li class="nav-item"><a class="nav-link" href="https://www.ibooker.org.cn/forums/">学习论坛</a></li> -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://127.0.0.1:8000/#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        学习资源
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="https://home.apachecn.org/learn/">学习活动</a>
-                        <a class="dropdown-item" href="http://127.0.0.1:8000/#">算力申请</a>
-                        <a class="dropdown-item" href="https://home.apachecn.org/map/">学习咨询</a>
-                        <a class="dropdown-item" href="https://home.apachecn.org/donate/">网友捐赠</a>
-                        <a class="dropdown-item" href="https://it-ebooks.flygon.net/">电子书</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="https://wall.alphacoders.com/by_sub_category.php?id=304839&amp;name=%E7%94%B5%E5%85%89%E8%B6%85%E4%BA%BA%E5%8F%A4%E7%AB%8B%E7%89%B9+%E5%A3%81%E7%BA%B8&amp;lang=Chinese">心跳壁纸</a>
-                    </div>
-                </li>
-            </ul>
-            <!--<form class="form-inline mr-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>-->
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="https://github.com/apachecn">GitHub</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://127.0.0.1:8000/#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        联系方式
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="https://weibo.com/apachecn">微博</a>
-                        <a class="dropdown-item" href="https://www.zhihu.com/people/apachecn/activities">知乎</a>
-                        <a class="dropdown-item" href="http://data.apachecn.org/img/contact/zsxq.png">知识星球</a>
-                        <a class="dropdown-item" href="http://data.apachecn.org/img/contact/weixin.png">微信公众号</a>
-                    </div>
-                </li>
-            </ul>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <!-- 动态粒子LOGO -->
+            <div class="logo-container">
+                <div class="logo">
+                    <canvas id="logo-canvas" class="logo-canvas" width="40" height="40"></canvas>
+                </div>
+                <span class="brand-name">科技服务平台</span>
+            </div>
+            
+            <!-- 产品分类下拉菜单 -->
+            <div class="menu-container">
+                <button class="menu-button">
+                    产品服务 <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="number.html" class="dropdown-item">号码线路</a>
+                    <a href="verify.html" class="dropdown-item">号码认证</a>
+                    <a href="sms.html" class="dropdown-item">短信通道</a>
+                    <a href="flashsms.html" class="dropdown-item">闪信服务</a>
+                    <a href="detect.html" class="dropdown-item">号码检测</a>
+                    <a href="creditcheck.html" class="dropdown-item">失信人检测</a>
+                    <a href="legal.html" class="dropdown-item">批量电子律函</a>
+                    <a href="database.html" class="dropdown-item">碰撞库</a>
+                    <a href="government.html" class="dropdown-item">政务机构库</a>
+                    <a href="judgment.html" class="dropdown-item">裁决文书库</a>
+                    <a href="autocase.html" class="dropdown-item">批量自动立案</a>
+                    <a href="integrated.html" class="dropdown-item">一体化系统</a>
+                    <a href="quality.html" class="dropdown-item">质检系统</a>
+                    <a href="callcenter.html" class="dropdown-item">呼叫中心</a>
+                    <a href="workphone.html" class="dropdown-item">工作手机</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navbar-right">
+            <!-- 个人中心入口 + 注册/登录按钮 -->
+            <a href="user.html" class="menu-button">
+                <i class="fas fa-user-circle"></i> 个人中心
+            </a>
+            <button class="auth-button login-button">登录</button>
+            <button class="auth-button register-button glow-border">注册</button>
         </div>
     </nav>
-    <div>
-    
-<!-- LOGIN FORM -->
-<!--===================================================-->
-<div id="content">    
-    <p class="p1"><strong>iBooker 布客</strong></p>
-    <p class="p2"><strong>布道 · 开源 · 智能 · 极客</strong></p>
-    <p id="qr"><img src='img/about/ibooker_zsxq_qr_s.png'/></p>
-</div>
-<div id="footer">
-    <ul class="list-inline text-center">
-        <div style="margin:0 0 10.5px;"><script src="./index_files/hm.js"></script><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1275211409'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/z_stat.php%3Fid%3D1275211409%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></div>
-        @Copyright 2016-2019 网站由 <a href="https://github.com/apachecn" target="_blank">ApacheCN</a> 提供支持 ICP许可证号: <a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备19016010号-1</a>
-    </ul>
-</div>
 
+    <!-- Banner区 -->
+    <section class="banner">
+        <!-- 实时演算的数据流粒子动画 -->
+        <canvas id="banner-canvas" class="banner-canvas"></canvas>
+        
+        <div class="banner-content">
+            <h1 class="banner-title">数字科技赋能法律服务新生态</h1>
+            <p class="banner-subtitle">整合号码检测、失信查询、电子律函等数字化服务，提升法律工作效率</p>
+            <!-- 带流光特效的「立即体验」按钮 -->
+            <button class="cta-button">立即体验</button>
+        </div>
+    </section>
 
-    </div>
+    <!-- 核心服务展示 -->
+    <section class="services">
+        <h2 class="section-title">核心服务</h2>
+        <p class="section-subtitle">为您提供一站式法律科技解决方案</p>
+        
+        <div class="services-grid">
+            <!-- 服务卡片1 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 5.5C3 4.119 4.119 3 5.5 3H18.5C19.881 3 21 4.119 21 5.5V18.5C21 19.881 19.881 21 18.5 21H5.5C4.119 21 3 19.881 3 18.5V5.5Z" stroke="#6366F1" stroke-width="2"/>
+                        <path d="M9 9H15" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M9 12H15" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M9 15H13" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">号码线路</h3>
+                <p class="service-description">提供稳定高效的手机卡及号码线路服务，满足企业及个人通信需求</p>
+                <a href="number.html" class="service-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <!-- 服务卡片2 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#6366F1" stroke-width="2"/>
+                        <path d="M9 12L11 14L15 10" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">闪信服务</h3>
+                <p class="service-description">借助运营商权威渠道，直达用户手机主屏，提升信息触达率</p>
+                <a href="flashsms.html" class="service-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <!-- 服务卡片3 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 11L12 14L15 11" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 4V14" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5 20H19" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">号码检测</h3>
+                <p class="service-description">实时检测手机号状态、有效性及风险，为企业通信安全保驾护航</p>
+                <a href="detect.html" class="service-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <!-- 服务卡片4 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 9L12 16L5 9" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">电子律函</h3>
+                <p class="service-description">一键生成标准电子律函，支持电子签名，合规高效送达</p>
+                <a href="legal.html" class="service-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <!-- 服务卡片5 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 4H3C1.89543 4 1 4.89543 1 6V18C1 19.1046 1.89543 20 3 20H21C22.1046 20 23 19.1046 23 18V6C23 4.89543 22.1046 4 21 4Z" stroke="#6366F1" stroke-width="2"/>
+                        <path d="M1 10H23" stroke="#6366F1" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">失信人检测</h3>
+                <p class="service-description">一键查询被执行人信息，助力企业降低交易风险</p>
+                <a href="creditcheck.html" class="service-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <!-- 服务卡片6 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 5H15" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M3 12H21" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M3 19H9" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">一体化系统</h3>
+                <p class="service-description">整合多种法律科技工具于一体，提供全流程数字化解决方案</p>
+                <a href="integrated.html" class="service-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
 
-    <script src="./index_files/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="./index_files/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="./index_files/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="./index_files/scripts.js"></script>
+    <!-- 实时功能入口 -->
+    <section class="feature-entry">
+        <h2 class="section-title">快速检测</h2>
+        <p class="section-subtitle">输入手机号码，一键查询状态</p>
+        
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="请输入11位手机号码...">
+            <button class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+            
+            <!-- 动态结果预览浮层 -->
+            <div class="result-preview">
+                <div class="preview-item">
+                    <div class="preview-title">实时检测结果</div>
+                    <div class="preview-description">请输入有效手机号码进行查询</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- baidu union -->
-    <meta name="baidu_union_verify" content="f57410375adefc6880b9e0972468e329">
-    <!-- baidu webmaster -->
-    <meta name="baidu-site-verification" content="QQxaB1k0Bw">
-    <!-- baidu webmaster push -->
-    <script src="./index_files/push.js"></script>
-    <!-- baidu stats -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.7.1/dist/gsap.min.js"></script>
     <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?84fca651656bc67b4b2d56605b6d0852";
-            var s = document.getElementsByTagName("script")[0]; 
-            s.parentNode.insertBefore(hm, s);
+        // LOGO粒子动画
+        (function initLogoCanvas() {
+            const canvas = document.getElementById('logo-canvas');
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+            const particleCount = 20;
+            
+            // 创建粒子
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    vx: Math.random() * 1 - 0.5,
+                    vy: Math.random() * 1 - 0.5,
+                    color: `rgba(${Math.floor(Math.random() * 100 + 99)}, ${Math.floor(Math.random() * 100 + 102)}, ${Math.floor(Math.random() * 100 + 241)}, ${Math.random() * 0.5 + 0.5})`
+                });
+            }
+            
+            // 绘制粒子
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 绘制基础Logo形状
+                ctx.beginPath();
+                ctx.moveTo(20, 10);
+                ctx.lineTo(30, 20);
+                ctx.lineTo(20, 30);
+                ctx.lineTo(10, 20);
+                ctx.closePath();
+                ctx.fillStyle = '#6366F1';
+                ctx.fill();
+                
+                // 更新并绘制粒子
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    
+                    // 边界检查
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                    
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                });
+                
+                // 绘制连接线
+                ctx.strokeStyle = 'rgba(99, 102, 241, 0.3)';
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 15) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                
+                requestAnimationFrame(draw);
+            }
+            
+            draw();
         })();
+        
+        // Banner背景粒子动画
+        (function initBannerCanvas() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            const renderer = new THREE.WebGLRenderer({
+                canvas: document.getElementById('banner-canvas'),
+                alpha: true
+            });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            camera.position.z = 30;
+            
+            // 创建粒子系统
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particleCount = window.innerWidth < 768 ? 500 : 1500;
+            
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            const sizes = new Float32Array(particleCount);
+            
+            // 填充粒子属性
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 100; // x
+                positions[i + 1] = (Math.random() - 0.5) * 50 - 10; // y
+                positions[i + 2] = (Math.random() - 0.5) * 50; // z
+                
+                // 渐变色彩
+                const colorRatio = Math.random();
+                colors[i] = 0.39 + colorRatio * 0.1; // r
+                colors[i + 1] = 0.39 + colorRatio * 0.1; // g
+                colors[i + 2] = 0.95 - colorRatio * 0.2; // b
+                
+                sizes[i / 3] = Math.random() * 5 + 1;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+            
+            // 粒子着色器材质
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 1,
+                vertexColors: true,
+                opacity: 0.7,
+                transparent: true,
+                sizeAttenuation: true
+            });
+            
+            const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particleSystem);
+            
+            // 动画循环
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // 旋转粒子系统
+                particleSystem.rotation.x += 0.0005;
+                particleSystem.rotation.y += 0.0007;
+                
+                // 更新粒子位置
+                const positions = particlesGeometry.attributes.position.array;
+                for (let i = 0; i < positions.length; i += 3) {
+                    positions[i + 1] += (Math.random() - 0.5) * 0.05; // y方向轻微波动
+                    positions[i + 2] += (Math.random() - 0.5) * 0.05; // z方向轻微波动
+                }
+                particlesGeometry.attributes.position.needsUpdate = true;
+                
+                renderer.render(scene, camera);
+            }
+            
+            // 窗口大小调整
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+            
+            animate();
+        })();
+        
+        // GSAP动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航栏淡入动画
+            gsap.from('.navbar', {
+                opacity: 0,
+                y: -20,
+                duration: 0.8,
+                ease: 'power2.out'
+            });
+            
+            // Banner内容动画
+            gsap.from('.banner-title', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                delay: 0.2,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('.banner-subtitle', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                delay: 0.4,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('.cta-button', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                delay: 0.6,
+                ease: 'power3.out'
+            });
+            
+            // 核心服务卡片入场动画
+            gsap.from('.service-card', {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: 'power2.out',
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: '.services',
+                    start: 'top 80%'
+                }
+            });
+            
+            // 搜索框入场动画
+            gsap.from('.search-container', {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.feature-entry',
+                    start: 'top 80%'
+                }
+            });
+        });
     </script>
-    <!-- google webmaster -->
-    <meta name="google-site-verification" content="pyo9N70ZWyh8JB43bIu633mhxesJ1IcwWCZlM3jUfFo">
-    <!-- bing webmaster -->
-    <meta name="msvalidate.01" content="9E9EA92F7E5327E1FE8A5196D5253664">
-
-    <!-- clicking -->
-    <iframe src="https://www.bilibili.com/read/cv4337277" style="display:none"></iframe>
-    <iframe src="https://juejin.im/post/5e0af93ee51d4540e27747c5" style="display:none"></iframe>
-</body></html>
+</body>
+</html>
